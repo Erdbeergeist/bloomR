@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 murmurhash <- function(key, seed) {
-    invisible(.Call(`_BloomR_murmurhash`, key, seed))
+    invisible(.Call(`_bloomR_murmurhash`, key, seed))
 }
 

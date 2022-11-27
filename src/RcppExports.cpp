@@ -12,7 +12,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // murmurhash
 void murmurhash(std::string key, uint64_t seed);
-RcppExport SEXP _BloomR_murmurhash(SEXP keySEXP, SEXP seedSEXP) {
+RcppExport SEXP _bloomR_murmurhash(SEXP keySEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type key(keySEXP);
@@ -25,12 +25,12 @@ END_RCPP
 RcppExport SEXP _rcpp_module_boot_BloomFilter();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_BloomR_murmurhash", (DL_FUNC) &_BloomR_murmurhash, 2},
+    {"_bloomR_murmurhash", (DL_FUNC) &_bloomR_murmurhash, 2},
     {"_rcpp_module_boot_BloomFilter", (DL_FUNC) &_rcpp_module_boot_BloomFilter, 0},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_BloomR(DllInfo *dll) {
+RcppExport void R_init_bloomR(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
