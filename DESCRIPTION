@@ -1,12 +1,11 @@
 Package: bloomR
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
-Version: 1.0
+Title: Bloom Filter written in C++ for R
+Version: 0.1
 Date: 2022-11-27
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or
-        more full sentences.
+Author: Lukas
+Maintainer: Lukas <luxmitges@web.de>
+Description: A Bloom Filter for R written in C++ using the Murmur3 hash function.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp
