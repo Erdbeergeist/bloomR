@@ -27,7 +27,6 @@ uint64_t BloomFilter::ith_hash(uint64_t i, uint64_t hash_0, uint64_t hash_1){
 
 void BloomFilter::insert(std::string data){
   auto hashed = hashValue(&data, data.length());
-  std::cout<<*hashed.data()<<std::endl;
   
   for (int i = 0; i < BloomFilter::n_hashes; i++){
     BloomFilter::bits[BloomFilter::ith_hash(i, hashed[0], hashed[1])] = true;

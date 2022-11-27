@@ -10,19 +10,23 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _BloomR_rcpp_hello_world() {
+// murmurhash
+void murmurhash(std::string key, uint64_t seed);
+RcppExport SEXP _BloomR_murmurhash(SEXP keySEXP, SEXP seedSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
-    return rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type key(keySEXP);
+    Rcpp::traits::input_parameter< uint64_t >::type seed(seedSEXP);
+    murmurhash(key, seed);
+    return R_NilValue;
 END_RCPP
 }
 
+RcppExport SEXP _rcpp_module_boot_BloomFilter();
+
 static const R_CallMethodDef CallEntries[] = {
-    {"_BloomR_rcpp_hello_world", (DL_FUNC) &_BloomR_rcpp_hello_world, 0},
+    {"_BloomR_murmurhash", (DL_FUNC) &_BloomR_murmurhash, 2},
+    {"_rcpp_module_boot_BloomFilter", (DL_FUNC) &_rcpp_module_boot_BloomFilter, 0},
     {NULL, NULL, 0}
 };
 
