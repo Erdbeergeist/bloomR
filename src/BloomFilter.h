@@ -8,10 +8,12 @@
 class BloomFilter{
 public:
   BloomFilter(uint64_t size, uint8_t n_hashes, uint64_t seed);
- 
+
   void insert(std::string data);
   bool check(std::string data); 
+  double check_fill_rate();
   
+    
   uint64_t size;
   uint64_t n_hashes;
   uint64_t seed;

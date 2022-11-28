@@ -45,6 +45,15 @@ bool BloomFilter::check(std::string data){
   return true;
 }
 
+double BloomFilter::check_fill_rate(){
+  double ret = 0;
+  for (int i = 0; i < BloomFilter::bits.size(); i++){
+    ret += BloomFilter::bits[i];
+  }
+  return ret/BloomFilter::bits.size();
+}
+
+
 RCPP_MODULE(BloomFilter){
   class_<BloomFilter>("BloomFilter")
   
@@ -56,5 +65,6 @@ RCPP_MODULE(BloomFilter){
   
   .method("insert", &BloomFilter::insert)
   .method("check", &BloomFilter::check)
+  .method("check_fill_rate", &BloomFilter::check_fill_rate)
   ;
 }
