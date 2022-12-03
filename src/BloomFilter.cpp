@@ -78,7 +78,7 @@ bool validate_sns(SEXP* args, int nargs)
 
 /*
  *  Validate num_elements, epsilon, seed
- *           uint64_t, boot,  uint64_t
+ *           uint64_t, double,  uint64_t
  */
 bool validate_nes(SEXP* args, int nargs)
 { 
