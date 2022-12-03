@@ -19,7 +19,7 @@ data <- as.data.frame(faithful) %>% mutate(id = row_number(),
 train <- data %>% sample_frac(.7)
 test <- data %>% anti_join(train, by = 'name')
 
-# Initializing with a desired false positive rate
+# Initializing with a desired false positive probability
 b <- new(BloomFilter, 
          num_elements = as.integer(190), 
          epsilon = as.numeric(0.02), 
