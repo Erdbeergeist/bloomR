@@ -6,12 +6,20 @@
 using namespace Rcpp;
 
 
-BloomFilter::BloomFilter(uint64_t size, uint8_t n_hashes, uint64_t seed){
+BloomFilter::BloomFilter(uint64_t size, uint8_t n_hashes, uint64_t seed = 1337){
   BloomFilter::size = size;
   BloomFilter::n_hashes = n_hashes;
   BloomFilter::seed = seed;
   
   BloomFilter::bits = std::vector<bool> (size);
+}
+
+BloomFilter::BloomFilter(uint64_t num_elements, double epsilon, uint64_t seed = 1337){
+  BloomFilter::seed = seed;
+  BloomFilter::size = ceil(-(double)num_elements * log2(epsilon) / log(2));
+  BloomFilter::n_hashes = ceil(-log2(epsilon));
+  BloomFilter::bits = std::vector<bool> (BloomFilter::size);
+  
 }
 
 std::array<uint64_t, 2> BloomFilter::hashValue(void *data, std::size_t len){
@@ -54,10 +62,40 @@ double BloomFilter::check_fill_rate(){
 }
 
 
+/*
+ * Validators for Constructors
+ */
+
+/*
+ *  Validate size, n_hases, seed
+ *           uint64_t, uint8_t, uint64_t
+ */
+bool validate_sns(SEXP* args, int nargs)
+{ return TYPEOF(args[0]) == INTSXP && 
+         TYPEOF(args[1]) == INTSXP &&
+         TYPEOF(args[2]) == INTSXP; }
+
+
+/*
+ *  Validate num_elements, epsilon, seed
+ *           uint64_t, boot,  uint64_t
+ */
+bool validate_nes(SEXP* args, int nargs)
+{ 
+  return TYPEOF(args[0]) == INTSXP && 
+         TYPEOF(args[1]) == REALSXP &&
+         TYPEOF(args[2]) == INTSXP; }
+
 RCPP_MODULE(BloomFilter){
   class_<BloomFilter>("BloomFilter")
   
-  .constructor<uint64_t, uint8_t, uint64_t>()
+  .constructor<uint64_t, uint8_t, uint64_t>(
+    "size, n_hashes, seed constructor",
+    validate_sns)
+  
+  .constructor<uint64_t, double, uint64_t>(
+    "num_elements, epsilon, seed constructor",
+    validate_nes)
   
   .field("size", &BloomFilter::size)
   .field("n_hashes", &BloomFilter::n_hashes)
