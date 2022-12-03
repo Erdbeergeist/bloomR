@@ -1,7 +1,7 @@
 Package: bloomR
 Type: Package
 Title: Bloom Filter written in C++ for R
-Version: 0.1
+Version: 0.1.1
 Date: 2022-11-27
 Author: Lukas
 Maintainer: Lukas <luxmitges@web.de>

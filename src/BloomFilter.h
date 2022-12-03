@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <array>
+#include <cmath>
 #include "MurmurHash3.h"
 
 class BloomFilter{
 public:
   BloomFilter(uint64_t size, uint8_t n_hashes, uint64_t seed);
+  BloomFilter(uint64_t num_elements, double epsilon, uint64_t seed);
 
   void insert(std::string data);
   bool check(std::string data); 
